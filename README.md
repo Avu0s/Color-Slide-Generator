@@ -1,1 +1,1 @@
-# Color-Slide-Generator
+# Random-Color-Slideshow
