@@ -24,7 +24,7 @@ const numberGenerator = () =>{
 }
 
 const getRandomNumber = () => Math.floor(Math.random() * hexChar.length)
-const timer = () => interval = setInterval(numberGenerator, 6000)
+const timer = () => interval = setInterval(numberGenerator, 5000)
 
 const pausePlay = ()=> {
   if (pause.textContent == '||'){
