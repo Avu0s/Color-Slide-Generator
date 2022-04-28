@@ -3,30 +3,29 @@
 const hexChar = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'A', 'B', 'C', 'D', 'E', 'F'];
 const btn = document.querySelector('#btn')
 const color = document.querySelector('.color')
-const copy = document.querySelector('#copy')
-const pause = document.querySelector('#pause')
-let interval = null
+const copyText = document.querySelector('#copy')
+const pausePlay = document.querySelector('#pause')
+let interval;
 
-const copyHex = ()=>{
-  let copiedText = color.textContent
-  navigator.clipboard.writeText(copiedText)
-  copy.textContent = 'copied' 
-}
+const pureRandomNumArr = arr => Math.floor(Math.random() * arr.length)
+const getRandomHex = () => pureRandomNumArr(hexChar)
+
+const pureCopy = copied => navigator.clipboard.writeText(copied.textContent)
+const copyHex = () => {pureCopy(color); copyText.textContent = 'copied';}
 
 const numberGenerator = () =>{
-    let hexColor = '#'
+    let hexCode = '#'
     for(let i = 0; i < 6; i++){
-      hexColor += hexChar[getRandomNumber()]
+      hexCode += hexChar[getRandomHex()]
     }
-    document.body.style.backgroundColor = hexColor
-    color.textContent = hexColor
-    copy.textContent = 'copy'
+    document.body.style.backgroundColor = hexCode
+    color.textContent = hexCode
+    copyText.textContent = 'copy'
 }
 
-const getRandomNumber = () => Math.floor(Math.random() * hexChar.length)
 const timer = () => interval = setInterval(numberGenerator, 5000)
 
-const pausePlay = ()=> {
+const slideControl = ()=> {
   if (pause.textContent == '||'){
     pause.textContent = '▶'
     clearInterval(interval)
@@ -37,6 +36,6 @@ const pausePlay = ()=> {
   }
 }
 
-copy.addEventListener('click', copyHex)    
+copyText.addEventListener('click', copyHex)    
 btn.addEventListener('click', numberGenerator)
-pause.addEventListener('click', pausePlay)
+pausePlay.addEventListener('click', slideControl)
